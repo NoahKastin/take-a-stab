@@ -106,9 +106,6 @@ func _physics_process(delta: float) -> void:
 
 func _bite() -> void:
 	has_bitten = true
-	# Auto-stab: zombie dies with default knife color blood, score resets
-	var blood_dir: Vector3 = (global_position - target.global_position).normalized()
-	die(Color.SILVER, blood_dir)
 	GameManager.player_bitten()
 
 
