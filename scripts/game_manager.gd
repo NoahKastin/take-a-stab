@@ -9,6 +9,13 @@ signal game_reset
 var kills: int = 0
 var time_elapsed: float = 0.0
 var is_playing: bool = true
+var high_score: int = 0
+
+const SAVE_PATH := "user://highscore.save"
+
+
+func _ready() -> void:
+	_load_high_score()
 
 
 func _process(delta: float) -> void:
@@ -18,7 +25,23 @@ func _process(delta: float) -> void:
 
 func add_kill() -> void:
 	kills += 1
+	if kills > high_score:
+		high_score = kills
+		_save_high_score()
 	zombie_killed.emit()
+
+
+func _load_high_score() -> void:
+	if FileAccess.file_exists(SAVE_PATH):
+		var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
+		if file:
+			high_score = file.get_32()
+
+
+func _save_high_score() -> void:
+	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	if file:
+		file.store_32(high_score)
 
 
 func player_bitten() -> void:

@@ -10,14 +10,12 @@ var player: CharacterBody3D
 var zombie_scene: PackedScene = preload("res://scenes/zombie/zombie.tscn")
 var player_scene: PackedScene = preload("res://scenes/player/player.tscn")
 var spawn_cooldown := 0.0
-var debug_label: Label
 
 
 func _ready() -> void:
 	_setup_lighting()
 	_build_hallway()
 	_spawn_player()
-	_setup_debug_hud()
 	_spawn_zombie()
 
 	GameManager.zombie_killed.connect(_on_zombie_killed)
@@ -26,14 +24,6 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	# Update debug HUD
-	debug_label.text = "Kills: %d | Time: %.1f | Zombies: %d/%d" % [
-		GameManager.kills,
-		GameManager.time_elapsed,
-		_get_active_zombie_count(),
-		GameManager.get_max_zombies(),
-	]
-
 	if not GameManager.is_playing:
 		return
 
@@ -131,17 +121,6 @@ func _spawn_player() -> void:
 	player = player_scene.instantiate()
 	player.position = Vector3(0, 0, 0)
 	add_child(player)
-
-
-func _setup_debug_hud() -> void:
-	# Temporary debug HUD — replaced by watch in Phase 2
-	var canvas := CanvasLayer.new()
-	add_child(canvas)
-	debug_label = Label.new()
-	debug_label.position = Vector2(20, 20)
-	debug_label.add_theme_font_size_override("font_size", 24)
-	debug_label.add_theme_color_override("font_color", Color(0.9, 0.9, 0.6))
-	canvas.add_child(debug_label)
 
 
 func _spawn_zombie() -> void:

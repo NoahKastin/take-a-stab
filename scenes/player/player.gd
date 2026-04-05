@@ -43,6 +43,11 @@ var left_arm: Node3D
 var right_arm: Node3D
 var left_knife_mesh: MeshInstance3D
 var right_knife_mesh: MeshInstance3D
+var watch_viewport: SubViewport
+var watch_mesh: MeshInstance3D
+var kills_label: Label
+var time_label: Label
+var highscore_label: Label
 
 
 func _ready() -> void:
@@ -89,10 +94,97 @@ func _ready() -> void:
 	right_knife_mesh.rotation.y = deg_to_rad(-15)  # Tip angled leftward (inward)
 	right_arm.add_child(right_knife_mesh)
 
+	_setup_watch()
+
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 	GameManager.player_died.connect(_on_died)
 	GameManager.game_reset.connect(_on_game_reset)
+
+
+func _setup_watch() -> void:
+	# SubViewport renders the watch face as a 2D UI
+	watch_viewport = SubViewport.new()
+	watch_viewport.size = Vector2i(200, 160)
+	watch_viewport.transparent_bg = false
+	watch_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	add_child(watch_viewport)
+
+	# Gold bezel (drawn as background in the viewport)
+	var border := ColorRect.new()
+	border.color = Color(0.85, 0.7, 0.1)
+	border.size = Vector2(200, 160)
+	watch_viewport.add_child(border)
+
+	# Dark screen inset
+	var screen := ColorRect.new()
+	screen.color = Color(0.02, 0.02, 0.04)
+	screen.position = Vector2(8, 8)
+	screen.size = Vector2(184, 144)
+	watch_viewport.add_child(screen)
+
+	# Kills (large, prominent)
+	kills_label = Label.new()
+	kills_label.text = "0"
+	kills_label.position = Vector2(16, 12)
+	kills_label.add_theme_font_size_override("font_size", 52)
+	kills_label.add_theme_color_override("font_color", Color(0.95, 0.85, 0.2))
+	watch_viewport.add_child(kills_label)
+
+	# Time elapsed
+	time_label = Label.new()
+	time_label.text = "0:00"
+	time_label.position = Vector2(16, 72)
+	time_label.add_theme_font_size_override("font_size", 34)
+	time_label.add_theme_color_override("font_color", Color(0.95, 0.85, 0.2))
+	watch_viewport.add_child(time_label)
+
+	# High score
+	highscore_label = Label.new()
+	highscore_label.text = "HI: 0"
+	highscore_label.position = Vector2(16, 115)
+	highscore_label.add_theme_font_size_override("font_size", 24)
+	highscore_label.add_theme_color_override("font_color", Color(0.7, 0.6, 0.15))
+	watch_viewport.add_child(highscore_label)
+
+	# Watch body (gold box behind the face)
+	var body := MeshInstance3D.new()
+	var body_mesh := BoxMesh.new()
+	body_mesh.size = Vector3(0.065, 0.055, 0.01)
+	body.mesh = body_mesh
+	body.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	var body_mat := StandardMaterial3D.new()
+	body_mat.albedo_color = Color(0.85, 0.7, 0.1)
+	body_mat.metallic = 0.8
+	body.set_surface_override_material(0, body_mat)
+	body.position = Vector3(0, 0.025, 0.1)
+	left_arm.add_child(body)
+
+	# Watch face (viewport texture, slightly in front of body)
+	watch_mesh = MeshInstance3D.new()
+	var quad := QuadMesh.new()
+	quad.size = Vector2(0.055, 0.045)
+	watch_mesh.mesh = quad
+	watch_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	watch_mesh.position = Vector3(0, 0.025, 0.106)
+
+	var watch_mat := StandardMaterial3D.new()
+	watch_mat.albedo_texture = watch_viewport.get_texture()
+	watch_mat.emission_enabled = true
+	watch_mat.emission = Color(1, 1, 1)
+	watch_mat.emission_energy_multiplier = 0.5
+	watch_mat.emission_texture = watch_viewport.get_texture()
+	watch_mesh.set_surface_override_material(0, watch_mat)
+	left_arm.add_child(watch_mesh)
+
+
+func _process(_delta: float) -> void:
+	# Update watch display
+	kills_label.text = str(GameManager.kills)
+	var minutes := int(GameManager.time_elapsed) / 60
+	var seconds := int(GameManager.time_elapsed) % 60
+	time_label.text = "%d:%02d" % [minutes, seconds]
+	highscore_label.text = "HI: %d" % GameManager.high_score
 
 
 func _create_knife() -> MeshInstance3D:
