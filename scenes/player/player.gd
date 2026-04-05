@@ -147,6 +147,13 @@ func _setup_watch() -> void:
 	highscore_label.add_theme_color_override("font_color", Color(0.7, 0.6, 0.15))
 	watch_viewport.add_child(highscore_label)
 
+	# Watch is a child of camera_pivot (not left_arm) so it's always visible
+	# and doesn't bob during stab animations
+	var watch_node := Node3D.new()
+	watch_node.name = "Watch"
+	watch_node.position = Vector3(-0.14, -0.17, -0.3)  # Lower-left of view, within FOV
+	camera_pivot.add_child(watch_node)
+
 	# Watch body (gold box behind the face)
 	var body := MeshInstance3D.new()
 	var body_mesh := BoxMesh.new()
@@ -157,8 +164,7 @@ func _setup_watch() -> void:
 	body_mat.albedo_color = Color(0.85, 0.7, 0.1)
 	body_mat.metallic = 0.8
 	body.set_surface_override_material(0, body_mat)
-	body.position = Vector3(0, 0.025, 0.1)
-	left_arm.add_child(body)
+	watch_node.add_child(body)
 
 	# Watch face (viewport texture, slightly in front of body)
 	watch_mesh = MeshInstance3D.new()
@@ -166,7 +172,7 @@ func _setup_watch() -> void:
 	quad.size = Vector2(0.055, 0.045)
 	watch_mesh.mesh = quad
 	watch_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-	watch_mesh.position = Vector3(0, 0.025, 0.106)
+	watch_mesh.position = Vector3(0, 0, 0.006)
 
 	var watch_mat := StandardMaterial3D.new()
 	watch_mat.albedo_texture = watch_viewport.get_texture()
@@ -175,7 +181,7 @@ func _setup_watch() -> void:
 	watch_mat.emission_energy_multiplier = 0.5
 	watch_mat.emission_texture = watch_viewport.get_texture()
 	watch_mesh.set_surface_override_material(0, watch_mat)
-	left_arm.add_child(watch_mesh)
+	watch_node.add_child(watch_mesh)
 
 
 func _process(_delta: float) -> void:
