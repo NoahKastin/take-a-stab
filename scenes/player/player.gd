@@ -26,7 +26,7 @@ const LEFT_KNIFE_X_MAX := 0.8
 const RIGHT_KNIFE_X_MIN := -0.8
 const RIGHT_KNIFE_X_MAX := 0.4
 const STAB_Z_THRESHOLD := -0.2  # Must be at least this far forward (-Z is forward)
-const STAB_Y_TOLERANCE := 0.35  # Vertical tolerance — must be roughly aimed at the head
+const STAB_Y_TOLERANCE := 0.15  # Vertical tolerance — must be aimed at the head
 
 const DEFAULT_KNIFE_COLOR := Color.SILVER
 
@@ -100,6 +100,7 @@ func _create_knife() -> MeshInstance3D:
 	var box := BoxMesh.new()
 	box.size = Vector3(0.03, 0.02, 0.3)  # Thin blade extending forward (-Z)
 	mesh_inst.mesh = box
+	mesh_inst.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = DEFAULT_KNIFE_COLOR
 	mesh_inst.set_surface_override_material(0, mat)
