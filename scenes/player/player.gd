@@ -128,6 +128,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera_pivot.rotation.x = camera_rotation.x
 		camera_pivot.rotation.y = camera_rotation.y
 
+	# Click to capture mouse first (required for web — browsers ignore capture without a user gesture)
+	if event is InputEventMouseButton and event.pressed and Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		return
+
 	# Stab inputs
 	if event.is_action_pressed("stab_left") and not left_stabbing:
 		_do_stab(true)

@@ -51,17 +51,24 @@ func _process(delta: float) -> void:
 func _setup_lighting() -> void:
 	var light := DirectionalLight3D.new()
 	light.rotation_degrees = Vector3(-45, -15, 0)
-	light.light_energy = 0.7
-	light.shadow_enabled = true
+	light.light_energy = 1.0
+	light.shadow_enabled = false  # Shadows can be unreliable in web/Compatibility renderer
 	add_child(light)
+
+	# Second light from behind for fill
+	var fill_light := DirectionalLight3D.new()
+	fill_light.rotation_degrees = Vector3(-30, 165, 0)
+	fill_light.light_energy = 0.4
+	fill_light.shadow_enabled = false
+	add_child(fill_light)
 
 	var env_node := WorldEnvironment.new()
 	var environment := Environment.new()
 	environment.background_mode = Environment.BG_COLOR
 	environment.background_color = Color(0.08, 0.08, 0.1)
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	environment.ambient_light_color = Color(0.3, 0.3, 0.35)
-	environment.ambient_light_energy = 0.4
+	environment.ambient_light_color = Color(0.4, 0.4, 0.45)
+	environment.ambient_light_energy = 0.7
 	env_node.environment = environment
 	add_child(env_node)
 
