@@ -99,6 +99,12 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+	# Despawn if too far behind the player (they'll never catch up)
+	if global_position.z > target.global_position.z + 10.0:
+		is_dead = true
+		queue_free()
+		return
+
 	# Bite check
 	if dist < BITE_RANGE and not has_bitten:
 		_bite()
