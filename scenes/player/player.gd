@@ -26,6 +26,7 @@ const LEFT_KNIFE_X_MAX := 0.8
 const RIGHT_KNIFE_X_MIN := -0.8
 const RIGHT_KNIFE_X_MAX := 0.4
 const STAB_Z_THRESHOLD := -0.2  # Must be at least this far forward (-Z is forward)
+const STAB_Y_TOLERANCE := 0.35  # Vertical tolerance — must be roughly aimed at the head
 
 const DEFAULT_KNIFE_COLOR := Color.SILVER
 
@@ -208,6 +209,10 @@ func _check_stab_hit(is_left: bool) -> void:
 
 		# Must be in front (-Z is forward in camera space)
 		if local_dir.z > STAB_Z_THRESHOLD:
+			continue
+
+		# Must be aimed roughly at head height (not looking at floor/ceiling)
+		if absf(local_dir.y) > STAB_Y_TOLERANCE:
 			continue
 
 		# Check horizontal zone for this knife
