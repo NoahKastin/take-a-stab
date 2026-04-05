@@ -22,9 +22,9 @@ func add_kill() -> void:
 
 
 func player_bitten() -> void:
-	if not is_playing:
-		return
-	is_playing = false
+	# Soft reset: score/time reset, game continues immediately
+	kills = 0
+	time_elapsed = 0.0
 	player_died.emit()
 
 

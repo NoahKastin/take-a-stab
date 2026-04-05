@@ -3,7 +3,7 @@ extends Node3D
 
 const HALLWAY_WIDTH := 4.0
 const HALLWAY_HEIGHT := 3.0
-const HALLWAY_LENGTH := 200.0
+const HALLWAY_LENGTH := 2000.0
 const WALL_THICKNESS := 0.2
 
 var player: CharacterBody3D
@@ -62,7 +62,6 @@ func _setup_lighting() -> void:
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.ambient_light_color = Color(0.3, 0.3, 0.35)
 	environment.ambient_light_energy = 0.4
-	environment.tonemap_mode = Environment.TONE_MAP_ACES
 	env_node.environment = environment
 	add_child(env_node)
 
@@ -161,15 +160,9 @@ func _on_zombie_killed() -> void:
 
 
 func _on_player_died() -> void:
-	# Graybox death: brief pause, clear zombies, reset
-	for zombie in get_tree().get_nodes_in_group("zombies"):
-		if not zombie.is_dead:
-			zombie.die(Color.SILVER, Vector3.FORWARD)
-	await get_tree().create_timer(1.0).timeout
-	if not GameManager.is_playing:
-		GameManager.reset_score()
+	# The biting zombie already killed itself. Just ensure spawning continues.
+	spawn_cooldown = 0.0
 
 
 func _on_game_reset() -> void:
 	spawn_cooldown = 0.0
-	_spawn_zombie()

@@ -221,7 +221,7 @@ func _check_stab_hit(is_left: bool) -> void:
 
 func _kill_zombie(zombie: Node, is_left: bool) -> void:
 	var blood_color := Color(randf(), randf(), randf())
-	var blood_dir := (zombie.global_position - global_position).normalized()
+	var blood_dir: Vector3 = (zombie.global_position - global_position).normalized()
 	zombie.die(blood_color, blood_dir)
 
 	# Recolor the used knife
