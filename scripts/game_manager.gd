@@ -10,6 +10,7 @@ var kills: int = 0
 var time_elapsed: float = 0.0
 var is_playing: bool = true
 var high_score: int = 0
+var biting_zombie: Node = null
 
 const SAVE_PATH := "user://highscore.save"
 
@@ -44,9 +45,10 @@ func _save_high_score() -> void:
 		file.store_32(high_score)
 
 
-func player_bitten() -> void:
+func player_bitten(zombie: Node = null) -> void:
 	if not is_playing:
 		return
+	biting_zombie = zombie
 	is_playing = false
 	player_died.emit()
 
@@ -54,6 +56,7 @@ func player_bitten() -> void:
 func reset_score() -> void:
 	kills = 0
 	time_elapsed = 0.0
+	biting_zombie = null
 	is_playing = true
 	game_reset.emit()
 

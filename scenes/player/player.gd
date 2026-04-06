@@ -35,6 +35,10 @@ var left_stabbing := false
 var right_stabbing := false
 var left_knife_color := DEFAULT_KNIFE_COLOR
 var right_knife_color := DEFAULT_KNIFE_COLOR
+var is_in_death_sequence := false
+var waiting_for_play_again := false
+var play_again_label: Label
+var flash_tween: Tween
 
 # Scene nodes (built in _ready)
 var camera_pivot: Node3D
@@ -147,6 +151,15 @@ func _setup_watch() -> void:
 	highscore_label.add_theme_color_override("font_color", Color(0.7, 0.6, 0.15))
 	watch_viewport.add_child(highscore_label)
 
+	# "Play Again" (hidden until death sequence)
+	play_again_label = Label.new()
+	play_again_label.text = "► PLAY AGAIN"
+	play_again_label.position = Vector2(16, 68)
+	play_again_label.add_theme_font_size_override("font_size", 28)
+	play_again_label.add_theme_color_override("font_color", Color(1, 0.25, 0.2))
+	play_again_label.visible = false
+	watch_viewport.add_child(play_again_label)
+
 	# Watch is a child of camera_pivot (not left_arm) so it's always visible
 	# and doesn't bob during stab animations
 	var watch_node := Node3D.new()
@@ -206,7 +219,7 @@ func _create_knife() -> MeshInstance3D:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	# ESC toggles mouse capture (for debugging)
+	# ESC toggles mouse capture (always available)
 	if event.is_action_pressed("ui_cancel"):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -214,22 +227,28 @@ func _unhandled_input(event: InputEvent) -> void:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		return
 
+	# Click to capture mouse (required for web)
+	if event is InputEventMouseButton and event.pressed and Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		return
+
+	# During death sequence, any click triggers "Play Again"
+	if waiting_for_play_again:
+		if event is InputEventMouseButton and event.pressed:
+			waiting_for_play_again = false
+		return
+
 	if not GameManager.is_playing:
 		return
 
 	# Mouse look
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+	if event is InputEventMouseMotion:
 		camera_rotation.x -= event.relative.y * MOUSE_SENSITIVITY
 		camera_rotation.y -= event.relative.x * MOUSE_SENSITIVITY
 		camera_rotation.x = clampf(camera_rotation.x, -CAMERA_CLAMP, CAMERA_CLAMP)
 		camera_rotation.y = clampf(camera_rotation.y, -CAMERA_CLAMP, CAMERA_CLAMP)
 		camera_pivot.rotation.x = camera_rotation.x
 		camera_pivot.rotation.y = camera_rotation.y
-
-	# Click to capture mouse first (required for web — browsers ignore capture without a user gesture)
-	if event is InputEventMouseButton and event.pressed and Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		return
 
 	# Stab inputs
 	if event.is_action_pressed("stab_left") and not left_stabbing:
@@ -364,7 +383,58 @@ func reset_knives() -> void:
 
 
 func _on_died() -> void:
-	pass  # Graybox: movement stops via is_playing check
+	is_in_death_sequence = true
+	_death_sequence()
+
+
+func _death_sequence() -> void:
+	# Reset camera pivot (undo any mouse-look offset)
+	var reset_tween := create_tween()
+	reset_tween.tween_property(camera_pivot, "rotation", Vector3.ZERO, 0.4).set_ease(Tween.EASE_IN_OUT)
+	await reset_tween.finished
+
+	# Pan camera down-left to the watch
+	var pan_tween := create_tween()
+	pan_tween.tween_property(camera, "rotation", Vector3(-0.51, 0.44, 0), 0.6) \
+		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
+	await pan_tween.finished
+
+	# Show pulsing "PLAY AGAIN" on watch face
+	time_label.visible = false
+	play_again_label.visible = true
+	flash_tween = create_tween().set_loops()
+	flash_tween.tween_property(play_again_label, "modulate:a", 0.3, 0.5)
+	flash_tween.tween_property(play_again_label, "modulate:a", 1.0, 0.5)
+
+	# Wait for click
+	waiting_for_play_again = true
+	while waiting_for_play_again:
+		await get_tree().process_frame
+
+	# Clean up watch display
+	if flash_tween:
+		flash_tween.kill()
+		flash_tween = null
+	play_again_label.visible = false
+	play_again_label.modulate.a = 1.0
+	time_label.visible = true
+
+	# Pan camera back to center
+	var return_tween := create_tween()
+	return_tween.tween_property(camera, "rotation", Vector3.ZERO, 0.4) \
+		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
+	await return_tween.finished
+
+	# Auto-stab the biting zombie (silver blood = distinct from normal kills)
+	var zombie = GameManager.biting_zombie
+	if zombie and is_instance_valid(zombie) and not zombie.is_dead:
+		var blood_dir: Vector3 = (zombie.global_position - global_position).normalized()
+		zombie.die(Color.SILVER, blood_dir)
+
+	# Reset and resume
+	camera_rotation = Vector2.ZERO
+	is_in_death_sequence = false
+	GameManager.reset_score()
 
 
 func _on_game_reset() -> void:

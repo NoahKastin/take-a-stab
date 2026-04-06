@@ -146,16 +146,12 @@ func _on_zombie_killed() -> void:
 
 
 func _on_player_died() -> void:
-	# Graybox death: brief pause, clear zombies, reset
-	# TODO Phase 2: replace with camera pan to watch + "Play Again" button
-	for zombie in get_tree().get_nodes_in_group("zombies"):
-		if not zombie.is_dead:
-			zombie.die(Color.SILVER, Vector3.FORWARD)
-	await get_tree().create_timer(1.0).timeout
-	if not GameManager.is_playing:
-		GameManager.reset_score()
+	# Death sequence (camera pan, Play Again) handled by player.gd
+	# Zombies freeze via is_playing check in their _physics_process
+	pass
 
 
 func _on_game_reset() -> void:
 	spawn_cooldown = 0.0
-	_spawn_zombie()
+	if _get_active_zombie_count() < 1:
+		_spawn_zombie()

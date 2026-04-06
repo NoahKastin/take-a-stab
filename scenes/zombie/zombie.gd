@@ -112,7 +112,7 @@ func _physics_process(delta: float) -> void:
 
 func _bite() -> void:
 	has_bitten = true
-	GameManager.player_bitten()
+	GameManager.player_bitten(self)
 
 
 func get_head_position() -> Vector3:
