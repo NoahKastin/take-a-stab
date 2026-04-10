@@ -12,7 +12,8 @@ Open design/architecture calls that need a human decision before downstream work
 
 ### Follow-up work
 
-1. **Meshy generation** — use the with-watch prompt below.
+1. ~~**Model generation**~~ — Done (2026-04-10, Tripo). All three .glb files in project root.
+   - **Blender cleanup still needed on left arm:** move watch to inner wrist, ensure watch face is a clean flat surface, fix finger grip around knife handle. Right arm and zombie look good as-is.
 2. **`_setup_watch()` rewrite** in `scenes/player/player.gd:109-197`:
    - Delete the code-generated `BoxMesh` body creation — the imported arm has its own watch body.
    - Locate the flat watch-face surface on the imported arm (the Meshy prompt instructs that the face must be a single flat rectangular surface for runtime retexturing).
@@ -22,8 +23,19 @@ Open design/architecture calls that need a human decision before downstream work
 4. **Retain** `scenes/player/player.gd:48-53` — variable declarations for `watch_viewport`, `watch_mesh`, and the kills/time/high-score/play-again labels. Only their host mesh changes.
 5. **Visibility check after rewrite:** verify the watch is actually visible in the default first-person pose. The original bug (commit `5d03ebf`) was that the left arm was mounted at 45° from camera center while the camera's half-FOV is only 37.5°, so the wrist (and any watch on it) was off-screen except during stab animations. That commit's fix was to abandon wrist-mounting entirely and parent the watch to `camera_pivot`. Now that we're committing to wrist-mounting again, the visibility fix has to come from elsewhere: bring the left-arm mount position in the player scene closer to camera center, adjust the arm pose so the wrist swings inward, or widen the camera FOV. **Do not** revert to camera-parenting — that would re-close this decision for the wrong reason. The Meshy prompt itself only controls the arm's *pose* and *internal geometry*, not its mount transform in the player scene, so prompt tweaks alone won't fix this kind of visibility failure.
 
-### Left arm Meshy prompt (with watch)
+### Model generation prompts
 
+**Left arm (with watch):**
 ```
-First-person video game left forearm and hand of a strong young Black woman, gripping the handle of a thin combat knife in a closed fist. The left wrist wears a chunky rectangular gold wristwatch with a gold metal link band. The watch face must be a single flat rectangular surface (it will be retextured at runtime) and must be oriented on the wrist so it is clearly visible to the camera in the first-person pose described below — not on the back of the wrist where it would face away from the player. Sleeveless, visible from just below the elbow to the fingertips. Stylized low-poly aesthetic, clean topology suitable for animation. Pose: arm extended forward as if seen from the player's POV, the knife angled very slightly inward toward the center of view. Knife: simple straight ~30cm blade with a dark wrapped handle. Plain neutral background.
+First-person left forearm and hand of a strong young Black woman, gripping a thin combat knife in a closed fist. The left wrist wears a chunky rectangular gold wristwatch with a gold metal link band. The watch face must be a single flat rectangular surface, oriented so it is clearly visible to the camera in the first-person pose — not on the back of the wrist where it would face away from the player. Sleeveless, visible from just below the elbow to the fingertips. Stylized low-poly aesthetic, clean topology suitable for animation. Pose: arm extended forward from the player's POV, knife angled slightly inward toward center of view, blade pointing upward. Knife: simple straight ~30cm blade with a dark wrapped handle. Plain neutral background.
+```
+
+**Right arm (with glove):**
+```
+First-person right forearm and hand of a strong young Black woman, gripping a thin combat knife in a closed fist. The hand wears a gold fingerless metallic glove (knuckles and back of hand covered, fingertips bare). Sleeveless, visible from just below the elbow to the fingertips. Stylized low-poly aesthetic, clean topology suitable for animation. Pose: arm extended forward from the player's POV, wrist neutral, knife angled slightly inward toward center of view, blade pointing upward. Knife: simple straight ~30cm blade with a dark wrapped handle. Plain neutral background.
+```
+
+**Zombie:**
+```
+Low-poly humanoid character, bald with no hair or hat, wide circular eyes. Wearing bell-bottom pants, platform shoes, and open-collar disco shirt. T-pose. Plain neutral background.
 ```

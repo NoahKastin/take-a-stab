@@ -44,6 +44,9 @@ Stems from these tracks already exist in `stems/` (audit the directory for the a
 - **Don't Let Go Of My Hand** — Neutral; low/med source.
 - **You Have Incoming** — Far-out; peak/experimental tier.
 - **Higher Love / Chameleon** — The riff. Peak tier. Hand-clapping energy.
+- **Mama** — Richest source (10 stems). Fode Sissoko kora (lead, all tiers) + GarageBand MIDI arrangement (drums, bass). Originally 108 BPM, successfully lowered to 100.
+- **Good Again** — 5 stems: drums_low, keys_low/med/high/peak.
+- **I'll Just Let You Go** — 1 stem: lead_low.
 
 ### Remaining candidates
 
@@ -52,10 +55,7 @@ Listed alphabetically — order does **not** imply priority. Pull from whichever
 - **Doin' It: Ambient Version** — Clapping source; alternative if Higher Love / Chameleon doesn't yield enough claps.
 - **FTLpunk** — Far-out/experimental, peak tier.
 - **Give Me Up** — Already loop-based, like Alien Savannah.
-- **Good Again** — Cheer / high-energy positivity. Planned source for **drums-low** (the last remaining vertical-mix blocker for the low tier).
-- **I'll Just Let You Go** — Rock-leaning but would work.
 - **Lights Up** — Funk potential; closer to the core ideal than the rock/experimental candidates.
-- **Mama** — Two key elements: Fode Sissoko kora (likely peak-tier lead) and a lush background arrangement likely to yield multiple additional stems. **BPM caveat:** Mama is at 108 BPM. Everything except the kora is GarageBand MIDI — re-render those parts at 100 BPM natively in GarageBand. The kora is real audio and must be time-stretched separately; plan is to run it through [audiotrimmer.com's speed changer](https://audiotrimmer.com/audio-speed-changer/) at **0.93x** (closest available value to the true ratio 100/108 ≈ 0.9259, lands at ~100.44 BPM). Resulting drift (~83 ms over 8 bars) is masked by the 8-bar loop crop.
 - **Menace** — Wide spectrum, good for stingers and multiple tiers.
 - **Signature Banana Horse** — Funky once shifted to the 100/200 BPM family.
 
