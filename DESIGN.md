@@ -204,6 +204,9 @@ The developer is not a 3D modeler. Asset sourcing:
 | Knives | Model in Blender or Godot CSG. Simple blade + handle. Material color changed at runtime |
 | Hallway tiles | Modular pieces in Blender. Muted textures (concrete, industrial). Godot assembles procedurally |
 
+### Attribution Reminder
+Once art assets generated with Meshy are added to the project, add Meshy attribution to the itch.io page bio/description.
+
 ## Development Phases
 
 | Phase | Focus | Deliverable |
