@@ -59,6 +59,18 @@ Listed alphabetically — order does **not** imply priority. Pull from whichever
 - **Give Me Up** — Already loop-based, like Alien Savannah.
 - **Lights Up** — Funk potential; closer to the core ideal than the rock/experimental candidates.
 
+### New candidates (art-style change)
+
+The shift in art style opens up new tonal/mood possibilities. Add these tracks to the candidate pool (and create aliases to their private folders in the master private songs folder):
+
+- **Wounded Skyline**
+- **Throwing Paper Airplanes At Your Head**
+- **Birdland / Sorceress** — only if non-derivative bits can be isolated
+- **If I Knew**
+- **Mars (Meow Meow Meow Meow)**
+- **What We Lost**
+- **I Don't Mind**
+
 ## What NOT to worry about
 - Key matching across songs — groove-driven stems often layer fine across keys; pitch-shifting in Godot is possible if needed
 - Perfection — 30-40 decent stems > 10 perfect ones
