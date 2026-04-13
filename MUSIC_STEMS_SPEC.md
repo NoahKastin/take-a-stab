@@ -47,9 +47,9 @@ Stems from these tracks already exist in `stems/` (audit the directory for the a
 - **Mama** — Richest source (10 stems). Fode Sissoko kora (lead, all tiers) + GarageBand MIDI arrangement (drums, bass). Originally 108 BPM, successfully lowered to 100.
 - **Good Again** — 5 stems: drums_low, keys_low/med/high/peak.
 - **I'll Just Let You Go** — 1 stem: lead_low.
-- **Menace** — 7 stems: drums_low/med/high/peak, bass_med, keys_high. Wide spectrum. ⚠️ keys_high still needs cropping (audiotrimmer.com down as of 2026-04-12).
-- **Signature Banana Horse** — 2 stems: drums_low, keys_peak. ⚠️ keys_peak may need cropping.
-- **Doin' It: Ambient Version** — 2 stems: drums_high, keys_low. ⚠️ Both may need cropping.
+- **Menace** — 7 stems: drums_low/med/high/peak, bass_med, keys_high. Wide spectrum.
+- **Signature Banana Horse** — 2 stems: drums_low, keys_peak.
+- **Doin' It: Ambient Version** — 2 stems: drums_high, keys_low.
 - **FTLpunk** — 3 stems: keys_low/med/peak. Far-out/experimental.
 
 ### Remaining candidates
