@@ -34,25 +34,25 @@ Tag each stem with one of these based on how intense it feels:
 
 ## Source Tracks
 
-Listed alphabetically — order does **not** imply priority. Pull from whichever track is inspiring on a given night. Characterizations exist so a specific tier/instrument gap can be matched to a likely source when that's useful. Where stems exist in `stems/`, they're summarized below — audit that directory for the authoritative file list.
+Listed alphabetically — order does **not** imply priority. Pull from whichever track is inspiring on a given night. Characterizations exist so a specific tier/instrument gap can be matched to a likely source when that's useful. All listed tracks have been harvested into stems; not all have been uploaded to `stems/` yet — audit that directory for the authoritative file list.
 
 - **Alien Savannah** — Already loop-based.
-- **Birdland / Sorceress** — Non-derivative bits confirmed isolable. No stems harvested yet.
+- **Birdland / Sorceress** — Non-derivative bits confirmed isolable.
 - **Charge Night** — Middle-of-the-road; med-tier source.
 - **Doin' It: Ambient Version** — 2 stems: drums_high, keys_low.
 - **Don't Let Go Of My Hand** — Neutral; low/med source.
 - **FTLpunk** — 3 stems: keys_low/med/peak. Far-out/experimental.
-- **Give Me Up** — Already loop-based, like Alien Savannah. No stems harvested yet.
+- **Give Me Up** — Already loop-based, like Alien Savannah.
 - **Good Again** — 5 stems: drums_low, keys_low/med/high/peak.
 - **Higher Love / Chameleon** — The riff. Peak tier. Hand-clapping energy.
 - **I'll Just Let You Go** — 1 stem: lead_low.
 - **Mama** — Richest source (10 stems). Fode Sissoko kora (lead, all tiers) + GarageBand MIDI arrangement (drums, bass). Originally 108 BPM, successfully lowered to 100.
 - **Menace** — 7 stems: drums_low/med/high/peak, bass_med, keys_high. Wide spectrum.
 - **Signature Banana Horse** — 2 stems: drums_low, keys_peak.
-- **Throwing Paper Airplanes At Your Head** — Exported, cropping pending.
-- **What We Lost** — No stems harvested yet.
+- **Throwing Paper Airplanes At Your Head**
+- **What We Lost**
 - **Wonderful Day** — Core funk.
-- **Wounded Skyline** — Exported, cropping pending.
+- **Wounded Skyline**
 - **You Have Incoming** — Far-out; peak/experimental tier.
 
 ## Pitch-Shifting / Key Alignment
