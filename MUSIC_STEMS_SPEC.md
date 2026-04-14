@@ -51,28 +51,49 @@ Stems from these tracks already exist in `stems/` (audit the directory for the a
 - **Signature Banana Horse** — 2 stems: drums_low, keys_peak.
 - **Doin' It: Ambient Version** — 2 stems: drums_high, keys_low.
 - **FTLpunk** — 3 stems: keys_low/med/peak. Far-out/experimental.
+- **Wounded Skyline** — Exported, cropping pending.
+- **Throwing Paper Airplanes At Your Head** — Exported, cropping pending.
 
 ### Remaining candidates
 
 Listed alphabetically — order does **not** imply priority. Pull from whichever track is inspiring on a given night. Characterizations exist so a specific tier/instrument gap can be matched to a likely source when that's useful.
 
+- **Birdland / Sorceress** — Non-derivative bits confirmed isolable.
 - **Give Me Up** — Already loop-based, like Alien Savannah.
-- **Lights Up** — Funk potential; closer to the core ideal than the rock/experimental candidates.
-
-### New candidates (art-style change)
-
-The shift in art style opens up new tonal/mood possibilities. Add these tracks to the candidate pool (and create aliases to their private folders in the master private songs folder):
-
-- **Wounded Skyline**
-- **Throwing Paper Airplanes At Your Head**
-- **Birdland / Sorceress** — only if non-derivative bits can be isolated
-- **If I Knew**
-- **Mars (Meow Meow Meow Meow)**
 - **What We Lost**
-- **I Don't Mind**
+
+## Pitch-Shifting / Key Alignment
+
+Most stems coexist without transposing. The clusters that already harmonize:
+- **Eb Minor**: Charge Night, Higher Love / Chameleon, Throwing Paper Airplanes At Your Head
+- **C Minor**: Give Me Up, Menace (keys_high)
+- **D Minor / F Major**: I'll Just Let You Go, Birdland / Sorceress, Wonderful Day
+- **F Minor**: Signature Banana Horse, Wounded Skyline (bass_low)
+- **F# Minor**: Mama (kora lead — harmonizes broadly)
+- **Other compatible**: Wounded Skyline keys_med (E Minor Pentatonic), Menace bass_high (A Major triad), YHI keys_peak (A Minor triad), YHI bass_high/lead_high (Bb Major — 1 note off C Minor or D Minor)
+
+### Priority transpositions (9 stems)
+
+These are the stems most likely causing audible discordance and should be addressed first. Target keys listed after the arrow:
+
+1. `mama_bass_high` — F# Minor → **E Minor**
+2. `mama_bass_peak` — F# Minor → **G Minor**
+3. `doinit_keys_low` — B Minor → **G Minor**
+4. `dontletgoofmyhand_keys_low` — B Minor → **G Minor**
+5. `dontletgoofmyhand_keys_med` — B Minor → **G Minor**
+6. `ftlpunk_keys_low` — A Harmonic Minor → **F Minor**
+7. `ftlpunk_keys_med` — A Harmonic Minor → **F Minor**
+8. `ftlpunk_keys_peak` — A Harmonic Minor → **F Minor**
+9. `youhaveincoming_lead_peak` — B Minor Blues / D Major Blues → **A Minor Blues or C Major Blues**
+
+### Flagged but likely fine in practice
+
+These were identified as theoretically clashing but are probably tolerable due to passing-tone bass motion or limited note sets:
+
+- `youhaveincoming_bass_low` — essentially chromatic (10/12 notes), but bass passing tones move fast
+- `youhaveincoming_bass_med` / `youhaveincoming_keys_med` — C#, D, Eb, E, F#, Ab, B (unusual but not strongly tonal)
 
 ## What NOT to worry about
-- Key matching across songs — groove-driven stems often layer fine across keys; pitch-shifting in Godot is possible if needed
 - Perfection — 30-40 decent stems > 10 perfect ones
 
 ## How the in-game mixer will use these
