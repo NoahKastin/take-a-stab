@@ -34,50 +34,47 @@ Tag each stem with one of these based on how intense it feels:
 
 ## Source Tracks
 
-Listed alphabetically — order does **not** imply priority. Pull from whichever track is inspiring on a given night. Characterizations exist so a specific tier/instrument gap can be matched to a likely source when that's useful. All listed tracks have been harvested into stems; not all have been uploaded to `stems/` yet — audit that directory for the authoritative file list.
+### Harvested
 
-- **Alien Savannah** — Already loop-based.
-- **Birdland / Sorceress** — Non-derivative bits confirmed isolable.
-- **Charge Night** — Middle-of-the-road; med-tier source.
-- **Doin' It: Ambient Version** — 2 stems: drums_high, keys_low.
-- **Don't Let Go Of My Hand** — Neutral; low/med source.
-- **FTLpunk** — 3 stems: keys_low/med/peak. Far-out/experimental.
-- **Give Me Up** — Already loop-based, like Alien Savannah.
-- **Good Again** — 5 stems: drums_low, keys_low/med/high/peak.
-- **Higher Love / Chameleon** — The riff. Peak tier. Hand-clapping energy.
-- **I'll Just Let You Go** — 1 stem: lead_low.
-- **Mama** — Richest source (10 stems). Fode Sissoko kora (lead, all tiers) + GarageBand MIDI arrangement (drums, bass). Originally 108 BPM, successfully lowered to 100.
-- **Menace** — 7 stems: drums_low/med/high/peak, bass_med, keys_high. Wide spectrum.
-- **Signature Banana Horse** — 2 stems: drums_low, keys_peak.
-- **Throwing Paper Airplanes At Your Head**
-- **What We Lost**
+Stems from these tracks already exist in `stems/` — audit the directory for the authoritative file list. Characterizations only:
+
 - **Wonderful Day** — Core funk.
-- **Wounded Skyline**
+- **Alien Savannah** — Already loop-based.
+- **Charge Night** — Middle-of-the-road; med-tier source.
+- **Don't Let Go Of My Hand** — Neutral; low/med source.
 - **You Have Incoming** — Far-out; peak/experimental tier.
+- **Higher Love / Chameleon** — The riff. Peak tier. Hand-clapping energy.
+- **Mama** — Richest source. Fode Sissoko kora (lead, all tiers) + GarageBand MIDI arrangement (drums, bass). Originally 108 BPM, successfully lowered to 100.
+- **Good Again**
+- **I'll Just Let You Go** — 1 stem: lead_low.
+- **Menace** — Wide spectrum.
+- **Signature Banana Horse**
+- **Doin' It: Ambient Version**
+- **FTLpunk** — Far-out/experimental.
+- **Birdland / Sorceress** — Non-derivative bits confirmed isolable.
+- **Give Me Up** — Already loop-based, like Alien Savannah.
+- **Wounded Skyline**
+- **Throwing Paper Airplanes At Your Head**
+
+### Remaining candidates
+
+Listed alphabetically — order does **not** imply priority. Pull from whichever track is inspiring on a given night.
+
+- **What We Lost**
 
 ## Pitch-Shifting / Key Alignment
 
-Most stems coexist without transposing. The clusters that already harmonize:
+Stems are transposed at harvest time so the library coexists without runtime pitch-shifting. Current key clusters:
+
 - **Eb Minor**: Charge Night, Higher Love / Chameleon, Throwing Paper Airplanes At Your Head
 - **C Minor**: Give Me Up, Menace (keys_high)
 - **D Minor / F Major**: I'll Just Let You Go, Birdland / Sorceress, Wonderful Day
-- **F Minor**: Signature Banana Horse, Wounded Skyline (bass_low)
+- **F Minor**: Signature Banana Horse, Wounded Skyline (bass_low), FTLpunk (keys)
+- **G Minor**: Mama (bass_peak), Doin' It (keys_low), Don't Let Go Of My Hand (keys_low/med)
+- **E Minor**: Mama (bass_high), Wounded Skyline (keys_med — E Minor Pentatonic)
 - **F# Minor**: Mama (kora lead — harmonizes broadly)
-- **Other compatible**: Wounded Skyline keys_med (E Minor Pentatonic), Menace bass_high (A Major triad), YHI keys_peak (A Minor triad), YHI bass_high/lead_high (Bb Major — 1 note off C Minor or D Minor)
-
-### Priority transpositions (9 stems)
-
-These are the stems most likely causing audible discordance and should be addressed first. Target keys listed after the arrow:
-
-1. `mama_bass_high` — F# Minor → **E Minor**
-2. `mama_bass_peak` — F# Minor → **G Minor**
-3. `doinit_keys_low` — B Minor → **G Minor**
-4. `dontletgoofmyhand_keys_low` — B Minor → **G Minor**
-5. `dontletgoofmyhand_keys_med` — B Minor → **G Minor**
-6. `ftlpunk_keys_low` — A Harmonic Minor → **F Minor**
-7. `ftlpunk_keys_med` — A Harmonic Minor → **F Minor**
-8. `ftlpunk_keys_peak` — A Harmonic Minor → **F Minor**
-9. `youhaveincoming_lead_peak` — B Minor Blues / D Major Blues → **A Minor Blues or C Major Blues**
+- **A Minor**: YHI keys_peak, YHI lead_peak, Menace bass_high (A Major triad)
+- **Other compatible**: YHI bass_high/lead_high (Bb Major — 1 note off C Minor or D Minor)
 
 ### Flagged but likely fine in practice
 
