@@ -100,6 +100,8 @@ On death, the "reset stab" (see Death & Respawn below) uses the default silver c
 
 ## Hallway Environment
 
+> **Status: Indefinite hiatus.** The current hallway is shipping as-is. The terrain-change and procedural-generation plans below are preserved for reference but are not actively being worked on.
+
 The game takes place in a procedurally-generated endless hallway.
 
 ### Base Design
@@ -133,7 +135,7 @@ Modular tile segments assembled procedurally: straight, slight curve, narrow, wi
 Difficulty drivers (all uncapped continuous values):
 1. **More simultaneous zombies** (primary driver)
 2. **Faster spawn rate** (less downtime)
-3. **Hallway complexity** (more terrain variation at higher difficulty)
+3. ~~**Hallway complexity** (more terrain variation at higher difficulty)~~ — on indefinite hiatus
 
 Difficulty does NOT increase:
 - Zombie movement speed (always slower than player)
